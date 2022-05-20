@@ -21,7 +21,7 @@ mixin _$StudentEvent {
     required TResult Function(StudentMod model) addStudent,
     required TResult Function() getAllStudent,
     required TResult Function(String studentName) searchStudent,
-    required TResult Function(StudentMod model) updateStudent,
+    required TResult Function(StudentMod model, int id) updateStudent,
     required TResult Function(int key) deleteStudent,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$StudentEvent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$StudentEvent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
     required TResult orElse(),
   }) =>
@@ -157,7 +157,7 @@ class _$AddStudent implements AddStudent {
     required TResult Function(StudentMod model) addStudent,
     required TResult Function() getAllStudent,
     required TResult Function(String studentName) searchStudent,
-    required TResult Function(StudentMod model) updateStudent,
+    required TResult Function(StudentMod model, int id) updateStudent,
     required TResult Function(int key) deleteStudent,
   }) {
     return addStudent(model);
@@ -169,7 +169,7 @@ class _$AddStudent implements AddStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
   }) {
     return addStudent?.call(model);
@@ -181,7 +181,7 @@ class _$AddStudent implements AddStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
     required TResult orElse(),
   }) {
@@ -285,7 +285,7 @@ class _$GetAllStudent implements GetAllStudent {
     required TResult Function(StudentMod model) addStudent,
     required TResult Function() getAllStudent,
     required TResult Function(String studentName) searchStudent,
-    required TResult Function(StudentMod model) updateStudent,
+    required TResult Function(StudentMod model, int id) updateStudent,
     required TResult Function(int key) deleteStudent,
   }) {
     return getAllStudent();
@@ -297,7 +297,7 @@ class _$GetAllStudent implements GetAllStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
   }) {
     return getAllStudent?.call();
@@ -309,7 +309,7 @@ class _$GetAllStudent implements GetAllStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
     required TResult orElse(),
   }) {
@@ -433,7 +433,7 @@ class _$SearchStudent implements SearchStudent {
     required TResult Function(StudentMod model) addStudent,
     required TResult Function() getAllStudent,
     required TResult Function(String studentName) searchStudent,
-    required TResult Function(StudentMod model) updateStudent,
+    required TResult Function(StudentMod model, int id) updateStudent,
     required TResult Function(int key) deleteStudent,
   }) {
     return searchStudent(studentName);
@@ -445,7 +445,7 @@ class _$SearchStudent implements SearchStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
   }) {
     return searchStudent?.call(studentName);
@@ -457,7 +457,7 @@ class _$SearchStudent implements SearchStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
     required TResult orElse(),
   }) {
@@ -523,7 +523,7 @@ abstract class _$$UpdateStudentCopyWith<$Res> {
   factory _$$UpdateStudentCopyWith(
           _$UpdateStudent value, $Res Function(_$UpdateStudent) then) =
       __$$UpdateStudentCopyWithImpl<$Res>;
-  $Res call({StudentMod model});
+  $Res call({StudentMod model, int id});
 }
 
 /// @nodoc
@@ -540,12 +540,17 @@ class __$$UpdateStudentCopyWithImpl<$Res>
   @override
   $Res call({
     Object? model = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$UpdateStudent(
       model: model == freezed
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as StudentMod,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -553,14 +558,16 @@ class __$$UpdateStudentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdateStudent implements UpdateStudent {
-  const _$UpdateStudent({required this.model});
+  const _$UpdateStudent({required this.model, required this.id});
 
   @override
   final StudentMod model;
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'StudentEvent.updateStudent(model: $model)';
+    return 'StudentEvent.updateStudent(model: $model, id: $id)';
   }
 
   @override
@@ -568,12 +575,15 @@ class _$UpdateStudent implements UpdateStudent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateStudent &&
-            const DeepCollectionEquality().equals(other.model, model));
+            const DeepCollectionEquality().equals(other.model, model) &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(model));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(model),
+      const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
@@ -586,10 +596,10 @@ class _$UpdateStudent implements UpdateStudent {
     required TResult Function(StudentMod model) addStudent,
     required TResult Function() getAllStudent,
     required TResult Function(String studentName) searchStudent,
-    required TResult Function(StudentMod model) updateStudent,
+    required TResult Function(StudentMod model, int id) updateStudent,
     required TResult Function(int key) deleteStudent,
   }) {
-    return updateStudent(model);
+    return updateStudent(model, id);
   }
 
   @override
@@ -598,10 +608,10 @@ class _$UpdateStudent implements UpdateStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
   }) {
-    return updateStudent?.call(model);
+    return updateStudent?.call(model, id);
   }
 
   @override
@@ -610,12 +620,12 @@ class _$UpdateStudent implements UpdateStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
     required TResult orElse(),
   }) {
     if (updateStudent != null) {
-      return updateStudent(model);
+      return updateStudent(model, id);
     }
     return orElse();
   }
@@ -662,10 +672,12 @@ class _$UpdateStudent implements UpdateStudent {
 }
 
 abstract class UpdateStudent implements StudentEvent {
-  const factory UpdateStudent({required final StudentMod model}) =
-      _$UpdateStudent;
+  const factory UpdateStudent(
+      {required final StudentMod model,
+      required final int id}) = _$UpdateStudent;
 
   StudentMod get model => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$UpdateStudentCopyWith<_$UpdateStudent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -739,7 +751,7 @@ class _$DeleteStudent implements DeleteStudent {
     required TResult Function(StudentMod model) addStudent,
     required TResult Function() getAllStudent,
     required TResult Function(String studentName) searchStudent,
-    required TResult Function(StudentMod model) updateStudent,
+    required TResult Function(StudentMod model, int id) updateStudent,
     required TResult Function(int key) deleteStudent,
   }) {
     return deleteStudent(key);
@@ -751,7 +763,7 @@ class _$DeleteStudent implements DeleteStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
   }) {
     return deleteStudent?.call(key);
@@ -763,7 +775,7 @@ class _$DeleteStudent implements DeleteStudent {
     TResult Function(StudentMod model)? addStudent,
     TResult Function()? getAllStudent,
     TResult Function(String studentName)? searchStudent,
-    TResult Function(StudentMod model)? updateStudent,
+    TResult Function(StudentMod model, int id)? updateStudent,
     TResult Function(int key)? deleteStudent,
     required TResult orElse(),
   }) {

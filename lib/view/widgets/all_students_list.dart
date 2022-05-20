@@ -60,7 +60,7 @@ class AllStudents extends StatelessWidget {
                         color: Colors.grey,
                       )),
                   IconButton(
-                    onPressed: () {
+                    onPressed: ()async {
                       // StudentMod detalis = data.elementAt(index);
                       // context
                       // .read<StudentBloc>()
@@ -68,7 +68,7 @@ class AllStudents extends StatelessWidget {
                       // alertDelete(context, detalis, index);
                       context
                           .read<StudentBloc>()
-                          .add(StudentEvent.deleteStudent(key: index));
+                          .add(StudentEvent.deleteStudent(key: _data.id!));
                     },
                     icon: const Icon(
                       Icons.delete,

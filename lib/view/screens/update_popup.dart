@@ -99,9 +99,9 @@ class Popup extends StatelessWidget {
                               result: _result,
                               image: image ?? _data.image,
                               id: _data.id);
-                          context
-                              .read<StudentBloc>()
-                              .add(StudentEvent.updateStudent(model: _update));
+                          context.read<StudentBloc>().add(
+                              StudentEvent.updateStudent(
+                                  model: _update, id: _data.id!));
                           context
                               .read<StudentBloc>()
                               .add(const StudentEvent.getAllStudent());

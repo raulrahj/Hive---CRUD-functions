@@ -12,7 +12,7 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
     on<AddStudent>((event, emit) async {
       final studentDB = await Hive.openBox<StudentMod>('db_student');
 
-      studentDB.put(event.model.id, event.model,);
+    await studentDB.put(event.model.id, event.model,);
       // studentDB.clear();
       add(const StudentEvent.getAllStudent());
     });
@@ -30,14 +30,14 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
     });
     on(<UpdateStudent>(event, emit) async {
       final studentDB = await Hive.openBox<StudentMod>('db_student');
-      studentDB.put(event.model.id, event.model);
+     await studentDB.put(event.id, event.model);
       const GetAllStudent();
       emit(state.studentList);
     });
     on<DeleteStudent>((event, emit) async {
       final studentDB = await Hive.openBox<StudentMod>('db_student');
-      final key = studentDB.keys.elementAt(event.key);
-      studentDB.delete(key);
+      // final key = studentDB.keys.elementAt(event.key);
+    await  studentDB.delete(event.key);
       add(const StudentEvent.getAllStudent());
       // const GetAllStudent();
     });

@@ -146,7 +146,7 @@ class _AddStudentState extends State<AddStudent> {
       
     }
     final _student = StudentMod(
-        id: DateTime.now().millisecond,
+        id: DateTime.now().microsecond,
         name: _name,
         age: _age,
         clas: _clas,
@@ -154,7 +154,7 @@ class _AddStudentState extends State<AddStudent> {
         image: image.path);
 
     BlocProvider.of<StudentBloc>(ctx)
-        .add(StudentEvent.addStudent(model: _student));
+        .add(StudentEvent.addStudent(model: _student,));
 
     //addStudent(_student);
     if (_student.name.isNotEmpty) {
